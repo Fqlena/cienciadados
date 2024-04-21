@@ -1,7 +1,7 @@
 import statistics
 
 # Atribui a variável o nome do arquivo a ser utlizado como banco de dados.
-nome_arquivo = "/content/drive/MyDrive/Colab Notebooks/trabalho_final/glicose.dat"
+nome_arquivo = "glicose_data.csv"
 
 # Cria a classe Glicemia
 class Glicemia:
@@ -17,13 +17,18 @@ class Glicemia:
     def __str__(self):
         return f"{self.dia}, {self.ano}, {self.glicemia}, {self.insulina}, {self.kcal}, {self.carb}, {self.sono}"
 
+
 # Abre e le o arquivo
 lista_glicemias = []
+#try:
 with open(nome_arquivo,"r",encoding="utf8") as leitor:
     for linha in leitor:
         vetor_linha = linha.split(";")
         obj = Glicemia(vetor_linha[0],vetor_linha[1],vetor_linha[3],vetor_linha[4],vetor_linha[5],vetor_linha[6],vetor_linha[7])
         lista_glicemias.append(obj)
+#except:
+ #   print("Algum problema para localizar o arquivo...")
+
 
 # Funções para calcular média, mediana e moda
 def calcular_media(valores):
