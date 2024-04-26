@@ -1,6 +1,6 @@
 import statistics
 
-nome_arquivo = "C:/Users/Avell/Downloads/glicose_data_suja.csv"
+nome_arquivo = "glicose_data_suja.csv"
 
 class Glicemia:
     def __init__(self, dia, ano, glicemia, insulina, kcal, carb, sono):
@@ -17,14 +17,18 @@ class Glicemia:
         #return f"{self.dia}"
 
 # open arq
+
 lista_glicemias = []
 #try:
 with open(nome_arquivo,"r",encoding="utf8") as procurador:
-    for linha in procurador:
+    for i,linha in enumerate(procurador):
         vetor_linha = linha.split(",")
         #obj = Glicemia(vetor_linha[0])
-        obj = Glicemia(vetor_linha[0],vetor_linha[1],vetor_linha[3],vetor_linha[4],vetor_linha[5],vetor_linha[6],vetor_linha[7])
-        lista_glicemias.append(obj)
+        try:
+            obj = Glicemia(vetor_linha[0],vetor_linha[1],vetor_linha[3],vetor_linha[4],vetor_linha[5],vetor_linha[6],vetor_linha[7])
+            lista_glicemias.append(obj)
+        except Exception as e:
+            print('Erro:' , i, e)
 #except:
  #   print("Algum problema para localizar o arquivo...")
 
