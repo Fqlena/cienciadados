@@ -1,9 +1,7 @@
 import statistics
 
-# Atribui a variável o nome do arquivo a ser utlizado como banco de dados.
-nome_arquivo = "glicose_data.csv"
+nome_arquivo = "C:/Users/Avell/Downloads/glicose_data_suja.csv"
 
-# Cria a classe Glicemia
 class Glicemia:
     def __init__(self, dia, ano, glicemia, insulina, kcal, carb, sono):
         self.dia = str(dia)
@@ -16,21 +14,22 @@ class Glicemia:
 
     def __str__(self):
         return f"{self.dia}, {self.ano}, {self.glicemia}, {self.insulina}, {self.kcal}, {self.carb}, {self.sono}"
+        #return f"{self.dia}"
 
-
-# Abre e le o arquivo
+# open arq
 lista_glicemias = []
 #try:
-with open(nome_arquivo,"r",encoding="utf8") as leitor:
-    for linha in leitor:
-        vetor_linha = linha.split(";")
+with open(nome_arquivo,"r",encoding="utf8") as procurador:
+    for linha in procurador:
+        vetor_linha = linha.split(",")
+        #obj = Glicemia(vetor_linha[0])
         obj = Glicemia(vetor_linha[0],vetor_linha[1],vetor_linha[3],vetor_linha[4],vetor_linha[5],vetor_linha[6],vetor_linha[7])
         lista_glicemias.append(obj)
 #except:
  #   print("Algum problema para localizar o arquivo...")
 
 
-# Funções para calcular média, mediana e moda
+# media mediana moda
 def calcular_media(valores):
     return sum(valores) / len(valores)
 
@@ -40,7 +39,7 @@ def calcular_mediana(valores):
 def calcular_moda(valores):
     return statistics.mode(valores)
 
-# Calcula e imprime a média, mediana e moda para glicemia, kcal e carb
+
 for atributo in ['glicemia', 'kcal', 'carb']:
     valores = [getattr(glicemia, atributo) for glicemia in lista_glicemias]
     print(f"A média da {atributo} é", calcular_media(valores))
